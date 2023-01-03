@@ -1,0 +1,233 @@
+*** Ticket Tracker Outline Document ***
+
+Description:
+    The purpose of this program is to help teams manage the development of a project. More specifically, it will divide parts of the project into tasks to be completed,
+    and assign those tasks to specific users to complete. 
+
+    Tasks will be created by the project manager in the form of tickets, which will have the task specifications and priority of task completion. 
+
+    Tickets will also have comment functionality that assigned parties can use to communicate progress towards task completion, and project managers can use to update 
+    assigned parties on the task as it is developed.
+
+    As tasks are completed, they will be archived to act as a historical roadmap of the project's development.
+    Comments can be added to a project by the project manager or an admin user to communicate to the entire assigned party updates about the project during development.
+
+    User's will be able to view all of their current assigned and active projects and tickets.
+
+    Admin's will be able to view all project's along with every ticket of a project. Admin's will also be able to view an individual user's assigned projects/tickets.
+
+
+Desired tech utilization:
+    * OAuth
+    * User Roles
+    * Redux
+    * HTML/CSS design
+    * Model-View-Controller (MVC)
+    * API Documentation (Swagger/Open-API)
+    * Cookies for persistent login, other uses? 
+    * Deployment
+    * Data structures? 
+
+
+
+
+Necessary functionality:
+    * Users
+        * Creation 
+        * Authentication/authorization
+        * Log out
+        * Roles 
+    * Projects
+        * Creation
+            * Description
+            * Access/Assignment
+        * Updates
+            * Add tickets to/remove from
+            * Comments as progress tracking
+        * Completion/Archival
+        * Deletion
+    * Tickets 
+        * Creation
+            * Details, Priority, Date, Visibility/Access 
+        * Assignment
+        * History
+        * Comments/Updates/Progress
+
+
+
+
+Extra functionality:
+    * Users:
+        * Track recent contributions
+    * Projects:
+        * Track recent user contributions/Change history
+        * Time framing
+        * Search for projects
+        * Allow anyone to create a project, not just admins
+            * Add list of projects an individual user is the creator/manager/owner of when viewing their information as an admin
+    * Tickets:
+        * Time framing
+        * Search for tickets
+        * Sort by priority 
+    * Login:
+        * Demo users 
+        * Admin creation for an individual company/group
+            * generate a key user's can use to create their profile and be added to the company group
+
+
+
+
+Necessary Pages:
+    * Log in
+        * OAuth/Registration
+        * Password recovery
+
+    * Home page: //Might not need, could just go directly to All projects/tickets page
+        * Navigate as base user:
+            * All projects/tickets page
+        * Navigate as admin user:
+            * All projects/tickets page
+            * All Users
+
+    * User page:
+        * Admin only
+        * Lists all users
+        * Displays individual user assigned projects/tickets/recent contributions(extra) to admin
+
+    * All Projects/Tickets page:
+        * Project View: 
+            * As user:
+                * Displays all assigned projects
+                * Displays all assigned tickets underneath corressponding project sorted by priority
+            * As Admin:
+                * Create new project
+                    * Assign project manager
+                * Displays assigned projects at top
+                * Displays remaining projects underneath 
+        * Tickets view:
+            * As User:
+                * Displays all assigned tickets ordered by priority
+            * As Admin:
+                * Displays all assigned tickets ordered by priority
+                * Displays all unassigned tickets in a separate section ordered by priority
+
+    * A Project's page:
+        * As user:
+            * Current assigned tickets
+            * View Project Description
+            * Assigned users / Project creator
+            * Project comments
+            * Project timeline (extra)
+            * Recent project additions/resolutions (extra)
+        * As Admin/project manager:
+            * Everything a user sees            
+            * All tickets & who's assigned  
+            * Ticket creation/resolution 
+            * Project user assignment 
+            * Update project description
+    
+    * A Ticket's page: 
+        * As user:
+            * View Details
+            * Date creation
+            * View priority
+            * Comments
+            * View assigned users
+        * As admin/project manager:
+            * Update Details
+            * Update priority
+            * Update assignment
+
+
+
+
+
+DB Tables:
+* Users
+ * List of Users
+    * Role information
+    * User name
+    * Login info? 
+    * Array of active projects
+    * Array of active users
+
+* Projects
+    * List of projects
+        * Project manager
+        * Array of assigned users
+        * Array of corresponding tickets
+
+* Project history 
+    * Maintains a project's ticket creation/resolution information as the project roadmap
+        * Each row would be a Ticket
+            * Each ticket in this table would have a status of creation/resolution
+            * Each ticket in this table would have the time it was created or resolved
+
+* Tickets
+    * Each row is a ticket with 
+        * Corresponding project id FK 
+        * Array of assigned users
+        * Priority
+            * Set to 'resolved' as a way to archive
+        * Description
+        * Creation date/time 
+
+* Comments
+    * Used to maintain comments left on either tickets or projects
+    * Why wouldn't i just use an array on the individual ticket/project table row of comments added chrnologically? arrays in a db got me fucked up ngl
+
+
+Roles:
+* User
+* Admin
+* Project manager
+
+Redux slices:
+* Users
+    * Admin users/Project Managers/Normal users? 
+* Projects
+* Tickets
+* Comments
+
+React components:
+
+
+Project development steps: 
+
+*setup:
+    * create git control
+    * Create visualization of how each page of the app should look
+    * Create react app
+    * Create project architecture around react components, redux slices, and MVC
+
+*frontend:
+    * Create page for a new project
+    * Create page for a new ticket
+    * add ticket adding functionality to projects
+    * add user creation
+        * some type of password security
+        * roles 
+        * authentication and authorization
+        * OAuth
+        * Cookies
+    * Implement user roles in relation to projects and tickets
+    * add user assignment to projects and tickets
+    * add viewership of all users, projects, tickets for admin accounts
+    * add viewership of assigned projects, tickets for user accounts
+    * make the login page look nice
+    * make the other pages look nice lol
+
+*backend:
+    * design the database
+    * design the api routes
+    * Implement the MVC 
+
+*Last steps: 
+    * test 
+    * optimize 
+    * comment
+    * beautify 
+    * document api
+    * deploy
+
+
