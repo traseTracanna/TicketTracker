@@ -33,3 +33,29 @@
         1) Have some outlines of how each page of the app will look in order to direct development 
         2) Create the frontend file architecture, taking into account redux slices and react components. 
     If I can accomplish these tasks tomorrow, on 1/5 I should be able to start actually writing code.
+
+
+1/4/23:
+    Just finished all of the basic page layouts to help me determine what the file architecture of the app will look like. 
+        Next I need to actually do that work -- figure out what the react components and redux slices are going to be and how to organize them. 
+        I feel compelled to do some reading on the purpose of each of those things though before i dive right in so i'm not making things redundant while leaving other things out.
+        It would help to define what a react component and redux slice is I suppose to help me determine which thing is which on the webpage, and maybe help to make more generic
+        types of each that can more easily be recycled throughout the code like the way pages are listed for tickets/projects or the way comments and assigned users are displayed.
+        
+        On top of all that I feel like I should brush up on MVC right away as well to make sure the way i'm designing my frontend won't screw me over later as i try to connect
+        the backend through mvc.
+
+    I didn't do as much today as I could have, and my future self will probably lament me for that,
+        But i basically just spent time trying to understand the react-redux library. I've got most of a grasp on it, but will likely have to take more notes tomorrow as found in
+        UnderstandingNewTech.txt 
+        I will also have to take a look at the MVC stuff tomorrow as well, and finally figure out how to best use redux slices and react components to organize my program.
+        It's probably best I continue to take my time with the actual setup of this project instead of getting antsy and rushing into things so that development goes as smoothly
+        as possible. 
+    
+    The good news is I at least took the time to wire frame all pages of my app which will help guide me in my file architecture tomorrow.
+
+    My goals for tomorrow are:
+        1) Fully understand the react-redux toolkit to the best of my ability
+        2) Understand how MVC will work within my system
+        3) Outline the react components and redux slices in relation to the functions of my program.
+        4) Create the project files i think i'll need. 
