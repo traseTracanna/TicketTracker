@@ -30,7 +30,6 @@
             If i fall into this bad habit it will likely demotivate me to actually work on this which will only exasperate the issue.
 
     Finally, my goals for tomorrow are:
-        1) Set up the repository on github
-        2) Have some outlines of how each page of the app will look in order to direct development 
-        3) Create the frontend file architecture, taking into account redux slices and react components. 
+        1) Have some outlines of how each page of the app will look in order to direct development 
+        2) Create the frontend file architecture, taking into account redux slices and react components. 
     If I can accomplish these tasks tomorrow, on 1/5 I should be able to start actually writing code.

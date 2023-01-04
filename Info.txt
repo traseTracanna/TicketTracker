@@ -26,7 +26,7 @@ Desired tech utilization:
     * API Documentation (Swagger/Open-API)
     * Cookies for persistent login, other uses? 
     * Deployment
-    * Data structures? 
+    * Data structures 
 
 
 
@@ -48,7 +48,7 @@ Necessary functionality:
         * Deletion
     * Tickets 
         * Creation
-            * Details, Priority, Date, Visibility/Access 
+            * Details, Priority, Date, Visibility/Access, type 
         * Assignment
         * History
         * Comments/Updates/Progress
@@ -68,7 +68,8 @@ Extra functionality:
     * Tickets:
         * Time framing
         * Search for tickets
-        * Sort by priority 
+        * Sort by priority or type
+        * Notification system of some sort alerting assigned user's of a tickets status or comments being updated
     * Login:
         * Demo users 
         * Admin creation for an individual company/group
@@ -78,16 +79,24 @@ Extra functionality:
 
 
 Necessary Pages:
+    * Nav bar
+        * Will overlay every other page
+        * Allows user to navigate to: 
+            * Assigned projects
+            * Assigned tickets
+        * Allows admin to nav to:
+            * Assigned projects
+            * Assigned tickets
+            * All projects/tickets
+            * Roles management/View users
     * Log in
         * OAuth/Registration
         * Password recovery
 
     * Home page: //Might not need, could just go directly to All projects/tickets page
-        * Navigate as base user:
-            * All projects/tickets page
-        * Navigate as admin user:
-            * All projects/tickets page
-            * All Users
+        * Use to display current tickets aprapot the current logged in user
+            * i.e. if you are an admin, you'd see all sorted by priority and type 
+            * if you are a user you'd see assigned sorted by priority and type
 
     * User page:
         * Admin only
@@ -98,7 +107,6 @@ Necessary Pages:
         * Project View: 
             * As user:
                 * Displays all assigned projects
-                * Displays all assigned tickets underneath corressponding project sorted by priority
             * As Admin:
                 * Create new project
                     * Assign project manager
@@ -122,7 +130,7 @@ Necessary Pages:
         * As Admin/project manager:
             * Everything a user sees            
             * All tickets & who's assigned  
-            * Ticket creation/resolution 
+            * Ticket creation
             * Project user assignment 
             * Update project description
     
@@ -137,6 +145,7 @@ Necessary Pages:
             * Update Details
             * Update priority
             * Update assignment
+            * Ticket deletion/resolution
 
 
 
