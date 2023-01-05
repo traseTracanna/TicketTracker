@@ -22,7 +22,6 @@ Desired tech utilization:
     * User Roles
     * Redux
     * HTML/CSS design
-    * Model-View-Controller (MVC)
     * API Documentation (Swagger/Open-API)
     * Cookies for persistent login, other uses? 
     * Deployment
@@ -192,13 +191,158 @@ Roles:
 * Project manager
 
 Redux slices:
-* Users
-    * Admin users/Project Managers/Normal users? 
-* Projects
-* Tickets
-* Comments
+* allProjectsSlice
+    contains data for all projects. This would be accessed by a selector to display based on the active user.       
+* allTicketsSlice
+    contains data for all tickets. This would be accessed by a selector to display based on the active user.
+
+*** So allProjectsSlice and allTicketsSlice only reducers would be to load the initial data. 
+    They would then have selectors that would:
+        return filtered lists of that data based on the user who is logged in or
+        return filtered data based on an individual project/ticket to load into a single project/ticket page 
+    ...
+
+     I was wrong. 
+    It seems these may also need reducers for
+     updating information about tickets and projects as new comments and tickets are created, 
+     and names/descriptions are updated
+
+     So basically, on initial load a list of data is taken from the db and assigned to the state of that slice to be accessed by a selector later.
+     Meaning, the state of allTicketsSlice would look something like:
+        allTicketsReducer.state = [ { /** ticket info from db **/ }, { /** ticket info from db **/} ]
+    So you would need a reducer that accepts a payload with the ticket/project to update, search through the state array for the matching ticket/project id, and then update its 
+    changed fields with the new info.
+
+    for instance, if the action is to add a new comment the reducer's action creator would be called 'addComment' and it would: 
+        Parse the array list of projects/tickets in the state to find the matching one
+        update the matching project/ticket's array of comments by pushing the new one on 
+***
+
+* viewSlice 
+    the state of this data determines the page layout that is displayed beneath the nav bar as either: homepage, list, user, project, or ticket 
+    This slice is updated when a user clicks an item on the navbar, or on an individual project or ticket link from somewhere
+
+* dataListSlice 
+    the state of this slice will determine 2 things:
+        1) The way data in the list is sorted, meaning an action dispatcher will re-render the data in a specific order based on what is clicked to sort
+            This data is stored in a linked list, where each node is an N number of rows, and once full will create a new node to continue filling
+            Each node will be a page of data to be displayed, and by default, after sort and on initial render, display page 1
+        2) Which page of data is being displayed in the list
+            meaning if the listPagesNav value is updated, it will be reflected in this state, thus returning a different page of data should one be available.
+
+        How this works in code would be like:
+            1) A user selects a dataList page
+            2) the viewSlice will update accordingly, telling the dataListSlice which data it needs to select, either ticket or project.
+            3) the appropriate selector from allProjectsSlice or allTicketsSlice is utilized to get all of the data based on the current user and store it in a variable here
+            4) the data in the variable is then loaded into a doubly-linked list of pages that contain row components 
+            5) Page 1 of the data is displayed on the page, and will be updated to page N if the user clicks a navigation button
+            6) When a user clicks a sort button, the data within the variable is resorted by a reducer action and stored in the state, the navState is reverted to page 1, and the
+                data is re-rendered. 
+            7) If a user clicks a project or ticket name, it calls the viewSlice to update, and the view is changed to that individual ticket or project
+
+* thisUserSlice
+    the purpose of this slice is just to maintain continuity of the user that is logged in 
+        i'm not sure if this is needed but i guess it solves the issue i'd have to figure out later of how to maintain this continuity?
+            otherwise i think it would be done via cookies or something, i really have no clue
+        on the 'users' page, accessible by admins, i'd like to have functionality of admins being able to select a user and see all of their projects/tickets as listed in the 
+        dataList pages, but i'm not sure how this will work yet.
+
+        Okay so i guess on login, the server is called to get the data of all users to store in an allUsers slice 
+        and the identity of the user who just logged in would be stored in a separate piece of state such as this in order to maintain continuity 
+        for the sake of displaying only relevant ticket/project information for the active user. 
+
+            Like, on login: allProjects, allTickets, and allUsers is populated by 3 server calls to the db, and then a selector in allUsers can store the id of 
+            thisUser in the state, which can be parsed by searching allUsers for thisUser's login information.
+
+            From there, the data to be loaded and displayed by the selectors of allProjects and allTickets for thisUser would be called after thisUser's state is no longer empty, 
+            thusly using thisUser's state data as the key to parse allProjects and allTickets for the appropriate data.
+
+* allUsersSlice
+    See thisUserSlice for more context. 
+    Essentially just stores information about all users on initial load after login.
+    Has selectors that can grab a specific user, or a set of user's based on something like if they are an admin. 
+
+    I was going to say you could use selectors here to get all the user's who are assigned to one project or ticket, but that info is stored within the project and ticket data, so
+    i'd think it's more efficient just to get it from there. 
+
+    But again, if you need to populate all of the users in the database for admins to see in the Users view, this is probably the right way to go about it, instead of parsing
+    through all the tickets and projects to populate it from that way.
+
+
 
 React components:
+* Navigation bar
+    * Depending on the selected button, those components will be displayed beneath the nav bar -- So the dataListSlice state is toggled by these button presses?
+    * Or maybe there is a viewSlice that changes whether looking at projectList, ticketList, a ticket, or a project?
+    * Also needs logout button  
+        *Projects/Tickets List
+            *Both of these pages will look pretty much the same, the only difference is the data displayed
+                *** So the way the data is generated to be displayed would be something like: ***
+                    1) A call is made to the db to grab all project and ticket data on the initial load, and this data is stored in the tickets and projects slices of state 
+                    2) When a list page is selected, either project or ticket, a selector grabs only the data associated with the user id that is signed in to be displayed
+                    3) The data table title bar is toggled to display either projects or tickets view
+                        The title bar doesn't need to be dynamically generated and thus can be hard coded cause it will always be 1 of 2 displays
+                        This means that each column title will just be a <li></li> and the ones that can be used to sort the table will have that clickable functionality written in 
+                            Since I need a title bar for the way tickets are listed on a project page, and users on the user page maybe it wouldn't be a bad idea for it 
+                            to be it's own generative component. This way it will stop me from having to write repetitive code to create list elements and make the columns sortable? 
+                    4) Row components are generated based on the data that is grabbed and added to the table
+                    5) If a dataList exceeds a certain number of rows, an N number of pages will be generated and navigable by the listPagesNav on the bottom of the table
+
+                The first component would be the data table, containing the title bar, the rows of data, and a navigation section at the bottom to go to different pages
+                The second component would be the 'title bar' which has the titles of every column
+                    the title bar is then made up of column names, which will be hard coded to be clickable or not
+                        *** The thing to figure out here is how will clicking on a title re-sort the way the data is displayed? ***
+                                Maybe via selectors that would re-sort the data on the page once a title is clicked?
+                                Maybe via actions within the reducer that re-order how the selected data is stored and will re-render it afterwards 
+                The next component would be a row of data, which would maybe be a horizontally displayed list of items generated by info recieved from the db
+                    Some list items will be clickable like project name directing you to the project's page, or ticket name directing you to the ticket's page 
+                The last component would be the list pages navigation section that allows users with more than N results that fit on a page to go to the next page of results
+                    This could be a linked list where each node is a page of rows to be displayed
+        
+        * Project Page
+            * The first component contains the project name and description
+            * Next, a component that will contain a list of all users assigned to the project and a button to add new users 
+            * Next, The list of tickets used by this project
+            * Lastly, a component that will display comments about this project, and have a form where users can type and submit new comments 
+
+            *** The way this page is generated to be rendered could be like ***
+                1) A selector is used from allProjectsSlice to grab all the info from the db about this specific project, which would be stored in a variable
+                2) That variable would be accessed to fill in the Project name, project description, list of users assigned to the project, and comments pannel  
+                3) The allTicketsSlice selector could take the id of the project and return all tickets info and store it in a variable here,
+                    then display only those relevant to the current user/all tickets if admin
+                        So i think this could be done by using the same Rows component as the dataList page 
+
+            *** Adding a new ticket / comment / assigning new users / Updating name and description ***
+                Need a way to dispatch form data in a way that new tickets/comments and updated info 
+                1) Will be displayed without the need to call the database
+                2) Will be added to the db for future access 
+                
+                Basically, allProjects.js and allTickets.js need methods to crud info in the db and update the store's state with new info
+
+        * Ticket Page
+            * This will be very similar to the project page in the way it will have assigned users, details, and comments which can be pulled from the allTicketsSlice 
+            * This page can recycle components that deal with generating a list of assigned users and comments 
+            * The only unique things it needs are 
+                1) The ability to update priority
+                2) The ability to delete/resolve a ticket for archival
+                3) A layout for it's description
+
+        * User's page
+            * This will have a table similar to the dataList table, so can probably just recycle that for this purpose? 
+            * The issue i face here is if this is supposed to display data of every user from the db, where am i pulling and storing that data from? 
+                * I could make a slice similar to allProjects or allTickets that would house allUsers, but i'm not sure if that's wholly necessary. 
+                * I just don't want to have to re-call the server to fetch every user's data everytime this page is navigated to
+                    and other than storing this info in the state, i don't know where else it would go to solve this issue. 
+            This whole section is kind of a mess when it comes to slices. I feel like there's a better way to go about all of it but i'm not just sure. 
+
+        * Homepage / Overview: 
+            * This is just going to be a page that will display on log in showing the user their assigned tickets/projects in different graphical formats
+            * More than anything this page is just meant to be kind of flashy, and be more simplistic in it's information to not overwhelm the user as soon as they log in.
+            * This page needs:
+                A component that will house a graphic displaying the user's tickets sorted by priority. 
+                A component that will house a graphic displaying the user's tickets sorted by type. 
+                    And by display, i don't mean like how they're displayed in the dataList view, but moreso just a graphical representation of the number of each ticket category
+
 
 
 Project development steps: 
@@ -207,7 +351,7 @@ Project development steps:
     * create git control
     * Create visualization of how each page of the app should look
     * Create react app
-    * Create project architecture around react components, redux slices, and MVC
+    * Create project architecture around react components, redux slices
 
 *frontend:
     * Create page for a new project

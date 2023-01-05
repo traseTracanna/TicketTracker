@@ -59,3 +59,28 @@
         2) Understand how MVC will work within my system
         3) Outline the react components and redux slices in relation to the functions of my program.
         4) Create the project files i think i'll need. 
+
+
+1/5/2023:
+    I've done more research this morning about the functions of MVC and redux and have decided that because of the way MVC increases complexity of structure for the sake of 
+    simplifying changing the way a particular system within an application works over time, that it may not best suit my needs for this project and cause more of a headache than
+    what it's worth to try and implement right now. I feel that the MVC system is good to keep in mind for if I were ever working on a project with a team of people, but these
+    independent solo projects are probably not the right time to try to throw it in. 
+        This is somewhat of a relief as it means there's one less thing I have to tackle during my development of this project. 
+
+    One other thing that is coming to me today is that this will likely take longer than I expect. My goal is to have this project done by EOD 1/22, but at the rate i'm starting off here'
+    I don't exactly have high hopes that this is a realistic expectation. Regardless I will still try to push to finish this as fast as I can manage and try to prevent dispairing if that
+    takes longer than i'm hoping for, but I think i'm already feeling kind of burnt out on this whole project. 
+        Hopefully these feelings of doubt will subside a bit once I actually get the project rolling. It's been a slow start and I think it's mostly cause i'm nervous about where
+        I'm going to start, and being worried about having my project structured in a way I will come to regret later. The key may be to just develop a plan, and stick to it
+        for as long as it can work, and then just get hacky from there.
+
+    Next on the docket for today is trying to framework the react and redux pieces of the puzzle and how they will fit together.
+
+    I think i've made some solid progress so far on defining the state of the application through the components that each page will need. 
+    This project definitely feels complex, but I still think it is manageable.
+    One thing that has come to mind, however, is I feel i may need to go ahead and create the structure of the database right away to help when I work on front end.
+    I just want to make sure that as i'm developing front-end features, I include spaces in the code where server calls are going to be so that I don't accidentally update the 
+    store instance without updating data in the db 
+        For instance, if i add a new user to a project, I need to make sure to update both the project's info and the user's info in the db. This can be done in one server call,
+        but i think it's important for me to mark out where this happens in the code so i don't end up missing something a few weeks from now.
