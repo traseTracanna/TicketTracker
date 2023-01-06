@@ -84,3 +84,60 @@
     store instance without updating data in the db 
         For instance, if i add a new user to a project, I need to make sure to update both the project's info and the user's info in the db. This can be done in one server call,
         but i think it's important for me to mark out where this happens in the code so i don't end up missing something a few weeks from now.
+
+
+1/6/23:
+    Again, I haven't really gotten around to much today as I am still intimidated about the architecture of this project and the efficiency of doing it well. 
+    I created the react app with redux support or whatever, and have started making all the folders and files i think will be necessary for this project.
+    The two pieces I've continued to avoid however are
+        1) login -- mostly because it seems like something that won't matter right off the gate of getting this thing to function,
+            but also because i don't really know how Oauth and cookies work so i'm puting it off for now
+        2) Users -- mostly because i don't really know how i'm going to handle user continuity after login, and because i'm not convinced my outlining on having both an
+            allUsers slice and a thisUser slice to be the best way to do it. 
+    Other than that, the architecture does still feel a bit messy, but I think i just have to commit, send it, accept that i'm going to make some mistakes here and aim to learn from
+    them after the fact. 
+        I could always refactor later, but I know that the messier the web of hacky code gets, the more daunting this will be further down the line. So maybe for now i just say fuckit
+        and focus on making a working product without worrying too much about this mysterious 'perfect way' of doing it that I don't know of or haven't thought of yet.
+        To at least be fair to myself, the organization I've done over the past 4 days of this project will help me monumentally compared to when i made the ecommerce full stack app,
+        where I went in with basically no plan and still somehow got something together in 3 weeks. 
+            This project is a bit more ambitious than that one, but i think the groundwork i've already laid for myself will prove to be helpful even if it is not perfect. 
+    
+    I think my immediate goal should be to
+        1) Make some fake local project, ticket, and user data to load into the store
+        2) Develop selectors to acquire the data corresponding to the correct user
+        3) Design the components and logic necessary to display the data in the dataList formats
+         - Maybe don't necessarily get stun locked in making the multiple-pages thing work right away if it proves to cause issue
+        4) Implement the view slice to switch between the two from the NavBar 
+        5) Design the components and logic necessary to display project data on the ProjectPage
+        6) Design the components and logic necessary to display ticket data on the TicketPage
+
+        Aim to finish this ^ by 1/11 (5 days)
+
+    then from there:
+        7) Design update functionality to the data i.e.:
+            a) adding users to tickets and projects
+            b) creating new tickets and projects
+            c) updating ticket priority
+            d) adding new comments
+            e) deleting/archiving tickets and projects
+                - Again, don't need to get too stunlucked on this one either -- can always circle back
+        8) Implement user roles 
+            a) Add logic for switching things from admin/user view
+            b) Add logic for allowing user's to be assigned as Project managers with corresponding functionality 
+        9) Implement user creation
+            a) OAuth
+            b) Cookies for user continuity and how it will affect an admin user viewing a non-admin user's projects/tickets
+                - Maybe circle back on this too
+        10) Implement the user's page
+            a) Determine the usability of allUsers and currentUser slices
+            b) Add logic for adding/removing admin controls to a user
+            c) Allow an admin to view all of a specific user's projects/tickets
+                - No need to get stun locked on this either if it proves to be tricky, just keep pushing 
+        11) Implement the home page
+            a) Necessary components for displaying data in graph format as desired. 
+    And that should cover 95% of front end's necessary features i think.
+    I would say from here move on to backend, and anything you skipped over can be circled back on when coming back this way to manage server call implementation.
+
+    Aim to finish this ^ by 1/17 ( 6 days ) 
+
+    This will leave 5 days for back end, including weekends. 
