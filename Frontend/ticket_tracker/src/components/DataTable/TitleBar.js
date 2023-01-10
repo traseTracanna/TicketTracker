@@ -13,6 +13,9 @@ export default function TitleBar({dataType}){
         case 'ticket':
             columnHeadings = ['Ticket Name: ', 'Description: ', 'Type: ', 'Priority: ', 'Date Created: ', 'Project: ', 'Created By: ']
             break;
+        case 'projectTickets':
+            columnHeadings = ['Ticket Name: ', 'Priority: ', 'Date Created: ', 'Assigned by: ']
+            break;
         default:
             columnHeadings = ['error'];
     };

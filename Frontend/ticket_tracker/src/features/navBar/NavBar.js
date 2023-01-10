@@ -18,6 +18,7 @@ import React from 'react';
 import DataList from '../dataList/DataList';
 import ProjectPage from '../projectPage/ProjectPage';
 import TicketPage from '../ticketPage/TicketPage';
+import DataLoader from './DataLoader';
 
 import {selectView, changeView } from './viewSlice';
 import {useSelector, useDispatch} from 'react-redux';
@@ -51,8 +52,10 @@ export default function NavBar(){
 
             </div>
             <div className='content'>
+                <DataLoader />
                 {/*<DataList />*/}
-                <ProjectPage />
+                {/*<ProjectPage />*/}
+                <TicketPage />
             </div>
         </div>
     )

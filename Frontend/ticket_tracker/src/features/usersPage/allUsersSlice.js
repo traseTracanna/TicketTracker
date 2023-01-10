@@ -7,7 +7,7 @@ export const allUsersSlice = createSlice({
     initialState: [],
     reducers:{
         loadUsersData: (state, action) =>{
-            state = action.payload;
+            state.push(action.payload);
         },
     },
 });

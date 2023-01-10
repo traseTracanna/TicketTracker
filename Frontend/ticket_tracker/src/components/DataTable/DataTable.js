@@ -19,6 +19,7 @@ import TitleBar from './TitleBar';
 
 export default function DataTable({content, type}) {
 
+
     return(
         <div className="data-table">
             <TitleBar dataType={type}/> 

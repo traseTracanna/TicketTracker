@@ -124,7 +124,7 @@ export const selectFilteredProjects = (state) =>{
 export const selectProjectById = id => state =>{
     const allProjects = selectAllProjects(state);
 
-    return allProjects.filter((project) => project.id === id)
+    return (allProjects.filter((project) => project.id === id))[0]
 }
 
 //TODO

@@ -114,7 +114,7 @@ export const selectFilteredTickets = (state) =>{
 export const selectTicketById = id => state =>{
     const allTickets = selectAllTickets(state);
 
-    return allTickets.filter((ticket) => ticket.id === id)
+    return (allTickets.filter((ticket) => ticket.id === id))[0];
 }
 
 //Exports: 

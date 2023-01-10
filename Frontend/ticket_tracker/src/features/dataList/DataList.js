@@ -87,14 +87,6 @@ export default function DataList(){
 
     const dispatch = useDispatch();
 
-    const onInitialLoad = () => {
-        //calling this with a project object that has a 'listOfTickets' property causes a stack overflow
-        //I think it's related to how selectFilteredTickets works
-        dispatch(loadProjectData(projects));
-        dispatch(loadTicketData(tickets));
-    };
-    useEffect(onInitialLoad, []);
-
 
     //Examples of selecting a single project/ticket by id for hte sake of rendering a single project/ticket page
     //I guess this code doesn't really belong in here, but at least it exists for me to find eventually

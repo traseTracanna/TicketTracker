@@ -5,27 +5,33 @@ I'm not sure if it would be wise to keep this page for this same purpose once i 
 */
 
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { projects, tickets, users } from '../../frontend_dev_data'; 
 
 import { loadTicketData } from '../ticketPage/allTicketsSlice';
 import { loadProjectData } from '../projectPage/allProjectsSlice'; 
-import { loadUsersData } from './allUsersSlice';
+import { loadUsersData } from '../usersPage/allUsersSlice';
 
-import { setCurrentUser } from './thisUserSlice';
+import { setCurrentUser } from '../usersPage/thisUserSlice';
 
 
 
+
+export default function DataLoader(){
 
 const dispatch = useDispatch();
 
 const onInitialLoad = () => {
-    //calling this with a project object that has a 'listOfTickets' property causes a stack overflow
-    //I think it's related to how selectFilteredTickets works
     dispatch(loadProjectData(projects));
     dispatch(loadTicketData(tickets));
     dispatch(loadUsersData(users));
     dispatch(setCurrentUser(users[0]));
 };
 useEffect(onInitialLoad, []);
+
+return (
+    <p>data loaded</p>
+);
+
+}

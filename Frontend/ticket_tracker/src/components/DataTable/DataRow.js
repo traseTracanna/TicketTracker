@@ -36,6 +36,17 @@ export default function DataRow({dataItem, dataType}){
         
                 </div>
             )
+        case 'projectTickets':
+            return(
+                <div className="data-row">
+                    <ul className="data-row">
+                        <li>{dataItem.name}</li>
+                        <li>{dataItem.priority}</li>
+                        <li>{dataItem.dateCreated}</li>
+                        <li>{dataItem.createdBy.name}</li>
+                    </ul>
+                </div>
+            )
 
 
     }

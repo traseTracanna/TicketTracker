@@ -10,49 +10,35 @@
 
 */
 
-import React, {useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 
-//Use this to call loadData in the slice on initial render
-import { users } from '../../frontend_dev_data'; 
-import { loadUsersData } from './allUsersSlice';
+import { useSelector } from 'react-redux';
 
-//Using this to set the current user to the first user in the array from the dev_data. 
-//Just temporary to complete an initial state for the sake of testing.
-import { setCurrentUser, selectCurrentUser } from './thisUserSlice';
+import { selectCurrentUser } from './thisUserSlice';
 
 
 export default function UserPage(){
 
 
-const dispatch = useDispatch();
+        const currentUser = useSelector(selectCurrentUser);
 
-const onFirstRender = () => {
-    dispatch(loadUsersData(users));
-    dispatch(setCurrentUser(users[0]));
-}
-useEffect(onFirstRender, []);
-
-const currentUser = useSelector(selectCurrentUser);
-console.log(currentUser);
-
-const loader = () =>{
-        if(currentUser.length !== 0){
-                return <p>Current user = {currentUser[0].name}, {currentUser[0].id}</p>
-        } else{
-                return <p>no gamers in the chat</p>;
+        const loader = () =>{
+                if(currentUser.length !== 0){
+                        return <p>Current user = {currentUser[0].name}, {currentUser[0].id}</p>
+                } else{
+                        return <p>no gamers in the chat</p>;
+                }
         }
-}
 
 
-return(
-        <div>
-                <p>User Page Test</p>
+        return(
                 <div>
-                        {loader()}
-                </div>
-                
-        </div> 
-)
+                        <p>User Page Test</p>
+                        <div>
+                                {loader()}
+                        </div>
+                        
+                </div> 
+        )
 
 };

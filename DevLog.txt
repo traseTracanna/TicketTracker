@@ -148,3 +148,21 @@
         Maybe i will have to build another selector for projects and tickets that can grab the data from one based on that button click, and load it into the corresponding components
         while simultaenously updating the view state. 
             Truly the further i get into this, the more messy it all feels. 
+
+    Big issue:
+        When a user is assigned a ticket, how is that date value tracked to be re-rendered when viewing the tickets list of a project's page? should it just be the date the ticket
+        was created? 
+        because in theory, a user could be assigned to a ticket after it was created, but where is that date stored? 
+        a ticket has an array of assigned users, but a user does not have an array of assigned tickets? should they? 
+        and then when they are assigned a ticket, that is added to the DB? i'm getting lost in the weeds on this one
+        and need to actually design my db framework to understand it i think? for now i'm just gonna put the 'date created' in there.
+
+    Okay, so despite dragging my feet pretty hard today, i was still able to get all of the components for Ticket and Project pages working, along with the dataList pages
+    to display correctly for the corresponding user id. 
+
+    For tomorrow: I would like to get the nav bar functioning properly for sure, 
+    other than that, I think it would be wise to
+        1) circle back to dataList sorting 
+        2) Work on beautifying the pages i have working so far
+        3) Implementing functionality of loading a project/ticket page when clicking on their name from a dataList 
+        4) Start thinking about how new projects/tickets/comments can be created and updated, and how users can be added to these things as well. 

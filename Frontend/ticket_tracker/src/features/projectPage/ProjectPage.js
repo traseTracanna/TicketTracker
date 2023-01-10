@@ -21,7 +21,7 @@
     A data table component will consist of a TitleBar component, several DataRow components, and a DataTableNavBar component. 
     The reason i think it should be organized this way is because those components can be recycled when generating the dataList view page for projects and tickets.
 */
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import  ItemAssignedUsers from '../../components/DataItem/ItemAssignedUsers';
 import  ItemComments from '../../components/DataItem/ItemComments';
@@ -29,36 +29,46 @@ import  ItemDescription from '../../components/DataItem/ItemDescription';
 import  DataTable  from '../../components/DataTable/DataTable';
 
 //Use this to call loadData in the slice on initial render
-import { projects } from '../../frontend_dev_data'; 
-import { loadProjectData, selectProjectById } from './allProjectsSlice';
+import { selectProjectById } from './allProjectsSlice';
 
 export default function ProjectPage(){
 
 
 const dispatch = useDispatch();
-dispatch(loadProjectData(projects));
-
-//const currentProject = useSelector(selectProjectById('fp0001'));
 
 
+let currentProject = useSelector(selectProjectById('fp0001'));
+console.log(currentProject);
+
+//Without this, the page breaks on initial load, as it is trying to read an undefined value from currentProject while the data loads. QQ make it make sense
+//Maybe i need to set my initial states to things other than [] in my reducers to make like a "loading..." thing for when i'm actually waiting on data from a server call
+//if(currentProject === undefined){
+ // currentProject = { assignedUsers: undefined, listOfTickets: [{name: 'test'}]};
+//}
+
+//Without this, the page breaks on initial load, as it is trying to read an undefined value from currentProject while the data loads. QQ make it make sense
+//Maybe i need to set my initial states to things other than [] in my reducers to make like a "loading..." thing for when i'm actually waiting on data from a server call
+if(currentProject !== undefined){
 return(
     <div className="project-page">
         <div className="project-header">
-            <ItemDescription />
+            <ItemDescription dataObject={currentProject} dataType={'project'}/>
 
         </div>
         <div className="assigned-users-list">
-            <ItemAssignedUsers />
+            <ItemAssignedUsers assignedUsers={currentProject.assignedUsers}/>
         </div>
-        {/*<div className="project-tickets-list">
-            <DataTable />
-        </div>*/}
+        {<div className="project-tickets-list">
+            <DataTable content={currentProject.listOfTickets} type={'projectTickets'}/>
+        </div>}
         <div className="comment-box">
-            <ItemComments />
+            <ItemComments commentsArray={currentProject.comments}/>
         </div>
         
     </div>
 
 );
+}
+return undefined;
 
 };

@@ -24,30 +24,28 @@ import  ItemAssignedUsers from '../../components/DataItem/ItemAssignedUsers';
 import  ItemComments from '../../components/DataItem/ItemComments';
 import  ItemDescription from '../../components/DataItem/ItemDescription';
 
-//Use this to call loadData in the slice on initial render
-import { tickets } from '../../frontend_dev_data'; 
-import { loadTicketData } from './allTicketsSlice';
+import { selectTicketById } from './allTicketsSlice';
 
 export default function TicketPage(){
 
 
 const dispatch = useDispatch();
 
-const onFirstRender = () => {
-    dispatch(loadTicketData(tickets));
-}
-useEffect(onFirstRender, []);
+let currentTicket = useSelector(selectTicketById('ft0001'));
+console.log(currentTicket);
 
+
+if(currentTicket !== undefined){
 return(
     <div className="ticket-page">
         <div className="ticket-header">
-            <ItemDescription />
+            <ItemDescription dataObject={currentTicket} dataType={'ticket'}/>
         </div>
         <div className="assigned-users-list">
-            <ItemAssignedUsers />
+            <ItemAssignedUsers assignedUsers={currentTicket.assignedUsers} />
         </div>
         <div className="comment-box">
-            <ItemComments />
+            <ItemComments commentsArray={currentTicket.comments}/>
         </div>
         
     </div>
@@ -55,5 +53,7 @@ return(
 
 
 )
+}
+return undefined;
 
 }
