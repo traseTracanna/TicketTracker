@@ -31,3 +31,95 @@
 
 
 */
+
+import { createSlice } from '@reduxjs/toolkit'; 
+import { selectCurrentUser } from '../usersPage/thisUserSlice';
+
+
+export const allTicketsSlice = createSlice({
+    name: "allTickets",
+    initialState: [],
+    reducers: {
+        loadTicketData: (state, action) =>{
+            action.payload.map((ticket) => {state.push(ticket)});
+
+        },
+        addTicket: (state, action) =>{
+            state.push(action.payload);
+
+        },
+        removeTicket: (state, action) =>{
+            state.filter((ticket) => ticket.id !== action.payload.id);
+
+        },
+        assignUser: (state,action) =>{
+            const ticketIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(ticketIndex !== -1){
+                state[ticketIndex].assignedUsers.push(action.payload.data);
+            };
+
+        },
+        removeUser: (state, action) =>{
+            const ticketIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(ticketIndex !== -1){
+                state[ticketIndex].assignedUsers.filter(user => user.id !== action.payload.data.id);
+            };
+
+        },
+        updateDesc: (state, action) =>{
+            const ticketIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(ticketIndex !== -1){
+                state[ticketIndex].description = action.payload.data;
+            };
+
+        },
+        updatePriority: (state,action) =>{
+            const ticketIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(ticketIndex !== -1){
+                state[ticketIndex].priority = action.payload.data;
+            };
+
+        },
+        addComment: (state,action) =>{
+            const ticketIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(ticketIndex !== -1){
+                state[ticketIndex].comments.push(action.payload.data);
+            };
+
+        },
+
+    },
+});
+
+//Selectors
+
+export const selectAllTickets = (state) => state.allTickets;
+
+export const selectFilteredTickets = (state) =>{
+    const allTickets = selectAllTickets(state);
+    const thisUser = selectCurrentUser(state);
+    const thisUserId = thisUser.id;
+
+    //so this needs to parse allTickets, an array of project objects, whose .assignedUsers property array contains thisUserId
+
+    return allTickets.filter((ticket) =>
+        ticket.assignedUsers.findIndex(thisUserId) !== -1
+    );
+
+};
+
+//Exports: 
+
+export const {
+    loadTicketData,
+    addComment,
+    addTicket,
+    removeTicket,
+    assignUser,
+    removeUser,
+    updateDesc,
+    updatePriority,
+
+} = allTicketsSlice.actions;
+
+export default allTicketsSlice.reducer; 

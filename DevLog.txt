@@ -102,42 +102,31 @@
         where I went in with basically no plan and still somehow got something together in 3 weeks. 
             This project is a bit more ambitious than that one, but i think the groundwork i've already laid for myself will prove to be helpful even if it is not perfect. 
     
-    I think my immediate goal should be to
-        1) Make some fake local project, ticket, and user data to load into the store
-        2) Develop selectors to acquire the data corresponding to the correct user
-        3) Design the components and logic necessary to display the data in the dataList formats
-         - Maybe don't necessarily get stun locked in making the multiple-pages thing work right away if it proves to cause issue
-        4) Implement the view slice to switch between the two from the NavBar 
-        5) Design the components and logic necessary to display project data on the ProjectPage
-        6) Design the components and logic necessary to display ticket data on the TicketPage
+    I moved my next goals directly into the info.txt document to avoid extra clutter in this file.
 
-        Aim to finish this ^ by 1/11 (5 days)
+    I also went ahead and made some fake data to help with loading initial state, amongst other operations, as i develop front end features. 
+        This data is found in ./Frontend/frontend_dev_data.js 
+        I'm hoping that this data will act as a framework for how the db will store and deliver data, but as i was creating the project and ticket and other data objects,
+        i became a little worried about the actual logic of that process 
+            Mostly im just worried it will be more complex than necessary causing confusion and headaches as i try to implement the db later on. 
 
-    then from there:
-        7) Design update functionality to the data i.e.:
-            a) adding users to tickets and projects
-            b) creating new tickets and projects
-            c) updating ticket priority
-            d) adding new comments
-            e) deleting/archiving tickets and projects
-                - Again, don't need to get too stunlucked on this one either -- can always circle back
-        8) Implement user roles 
-            a) Add logic for switching things from admin/user view
-            b) Add logic for allowing user's to be assigned as Project managers with corresponding functionality 
-        9) Implement user creation
-            a) OAuth
-            b) Cookies for user continuity and how it will affect an admin user viewing a non-admin user's projects/tickets
-                - Maybe circle back on this too
-        10) Implement the user's page
-            a) Determine the usability of allUsers and currentUser slices
-            b) Add logic for adding/removing admin controls to a user
-            c) Allow an admin to view all of a specific user's projects/tickets
-                - No need to get stun locked on this either if it proves to be tricky, just keep pushing 
-        11) Implement the home page
-            a) Necessary components for displaying data in graph format as desired. 
-    And that should cover 95% of front end's necessary features i think.
-    I would say from here move on to backend, and anything you skipped over can be circled back on when coming back this way to manage server call implementation.
+1/9/2023:
+    I think I made some decent head way today.
+        I defined at least the start of every single .js page of my application, and got most of the logic operators needed for every slice of the state.
+        I also sort of started working on getting components to display, so i can actually run the program now to start trouble shooting issues.
+        I spent a while trying to trouble shoot why the data coming from the set i created was causing stack overflow errors, and i think it relates 
+            mostly to the logic behind my selector for return filtered projects/tickets. I haven't looked at the tickets section yet, but it uses the same logic as projects 
+            so once i get that figured out i just need to port the fix over to tickets. 
 
-    Aim to finish this ^ by 1/17 ( 6 days ) 
+        My biggest struggle so far in trouble shooting is trying to exactly determine how to effectively load the data into each respective slice of state,
+        and also what that data looks like in terms of retrieving it. I've started to get a grasp on it, but I think it will continue to be something perplexing.
+        Using the redux dev tools tho seem to be a big help, as they can show me, in conjunction with console.logs, where exactly my code is going to shit. 
 
-    This will leave 5 days for back end, including weekends. 
+        Lastly, i'm a little worried about my organization already. I'm not sure if using the DataList.js file is the right place to do all the file sorting. On top of that,
+        since UserPage, TicketPage, and ProjectPage aren't really being rendered, the calls to load their data aren't happening unless I render them when rendering the dataList page
+            I think the solution to the second issue would be having a homepage file that would render whose express purpose is to load all data,
+                Then i can focus on using ProjectPage and TicketPage for rendering their respective views for individual items, instead of having all data load in there. 
+
+    So my goal for wednesday is to have the dataList page, the ProjectPage and TicketPage all fully functional, along with the NavBar to switch between the three. 
+    Meaning my goal for tomorrow will be to get the dataList page working correctly, and then start working on the components for the Project and Ticket Pages 
+    Then wednesday would be finishing the Project and Ticket pages and employing the navbar functionality.

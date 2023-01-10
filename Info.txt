@@ -373,7 +373,6 @@ Project development steps:
 *backend:
     * design the database
     * design the api routes
-    * Implement the MVC 
 
 *Last steps: 
     * test 

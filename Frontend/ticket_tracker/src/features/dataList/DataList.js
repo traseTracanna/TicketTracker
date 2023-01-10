@@ -49,3 +49,68 @@
 
 
 */
+
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import DataTable from '../../components/DataTable/DataTable';
+import ProjectPage from '../projectPage/ProjectPage';
+import UserPage from '../usersPage/UserPage';
+
+import { selectAllTickets, selectFilteredTickets, loadTicketData } from '../ticketPage/allTicketsSlice';
+import { selectAllProjects, selectFilteredProjects, loadProjectData } from '../projectPage/allProjectsSlice'; 
+import { selectDataListState } from './dataListSlice';
+import { selectCurrentUser } from '../usersPage/thisUserSlice';
+
+import { projects, tickets, arr1 } from '../../frontend_dev_data'; 
+
+//Saving all select data to local variables to be sorted
+//Not sure if this is the best way to go about this
+
+
+
+//Projects are sortable by: no of tickets, date created, created by
+//Tickets are sortable by: type, priority, date created, project, created by
+//I'm not sure if this is the best place to sort the data. I wonder if it would be better to sort in the corresponding slice as a selector
+
+export default function DataList(){
+
+    const allTickets = useSelector(selectAllTickets);
+    const allProjects = useSelector(selectAllProjects);
+    const currentTickets = useSelector(selectFilteredTickets);
+    const currentProjects = useSelector(selectFilteredProjects);
+
+    const isAdmin = useSelector(selectCurrentUser).isAdmin;
+
+    const listType = useSelector(selectDataListState).listType;
+    const listSort = useSelector(selectDataListState).listSort;
+
+    const dispatch = useDispatch();
+
+    const onInitialLoad = () => {
+        //calling this with a project object that has a 'listOfTickets' property causes a stack overflow
+        //I think it's related to how selectFilteredTickets works
+        dispatch(loadProjectData(projects));
+    };
+    useEffect(onInitialLoad, []);
+
+
+
+
+
+    let sortedList = [];
+
+    if(listType === 'project'){
+        sortedList = currentProjects;
+    } else{
+        sortedList = currentTickets;
+    };
+
+
+    return(
+        <div className="data-list-page">
+            <DataTable content={sortedList} type={listType} />
+            <UserPage />
+        </div>
+    )
+}

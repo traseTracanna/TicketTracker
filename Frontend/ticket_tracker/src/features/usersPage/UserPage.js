@@ -9,3 +9,34 @@
 
 
 */
+
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+//Use this to call loadData in the slice on initial render
+import { users } from '../../frontend_dev_data'; 
+import { loadUsersData } from './allUsersSlice';
+
+//Using this to set the current user to the first user in the array from the dev_data. 
+//Just temporary to complete an initial state for the sake of testing.
+import { setCurrentUser } from './thisUserSlice';
+
+
+export default function UserPage(){
+
+
+const dispatch = useDispatch();
+
+const onFirstRender = () => {
+    dispatch(loadUsersData(users));
+    dispatch(setCurrentUser(users[0]));
+}
+useEffect(onFirstRender, []);
+
+return(
+        <div>
+                <p>User Page Test</p>
+        </div> 
+)
+
+};

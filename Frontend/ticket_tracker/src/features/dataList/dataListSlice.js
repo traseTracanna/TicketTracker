@@ -19,3 +19,35 @@ dataListSlice
 
 
 */ 
+
+import { createSlice } from '@reduxjs/toolkit'; 
+
+//Projects are sortable by: no of tickets, date created, created by
+//Tickets are sortable by: type, priority, date created, project, created by
+
+export const dataListSlice = createSlice({
+    name: "dataList",
+    initialState: {listType: 'project', listSort: 'date'},
+    reducers: {
+        changeListType: (state, action) =>{
+            state.listType = action.payload;
+            if(action.payload === 'project'){
+                state.listSort = 'date';
+            } else{
+                state.listSort = 'priority';
+            };
+        },
+        changeListSort: (state, action) =>{
+            state.listSort = action.payload;
+        },
+    },
+});
+
+export const selectDataListState = (state) => state.dataList; 
+
+export const {
+    changeListType,
+    changeListSort,
+} = dataListSlice.actions;
+
+export default dataListSlice.reducer;

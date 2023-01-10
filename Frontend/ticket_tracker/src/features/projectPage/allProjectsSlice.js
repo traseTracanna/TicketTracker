@@ -31,3 +31,117 @@
 
 
 */
+
+import { createSlice } from '@reduxjs/toolkit'; 
+import { selectCurrentUser } from '../usersPage/thisUserSlice';
+
+export const allProjectsSlice = createSlice({
+    name: 'allProjects', 
+    initialState: [],
+    reducers: {
+        loadProjectData: (state, action) =>{
+            (action.payload).map((project) => state.push(project));
+        },
+        addProject: (state, action) =>{
+            state.push(action.payload); 
+        },
+        addComment: (state, action) =>{
+            const projectIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(projectIndex !== -1){
+                state[projectIndex].comments.push(action.payload.data);
+            };
+
+        },
+        addTicket: (state,action) =>{
+            const projectIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(projectIndex !== -1){
+                state[projectIndex].listOfTickets.push(action.payload.data);
+            };
+
+        },
+        removeTicket: (state,action) =>{
+            const projectIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(projectIndex !== -1){
+                state[projectIndex].listOfTickets.filter(ticket => ticket.id !== action.payload.data.id);
+            };
+
+        },
+        assignUser: (state,action) =>{
+            const projectIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(projectIndex !== -1){
+                state[projectIndex].assignedUsers.push(action.payload.data);
+            };
+
+        },
+        removeUser: (state,action)=>{
+            const projectIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(projectIndex !== -1){
+                state[projectIndex].assignedUsers.filter(user => user.id !== action.payload.data.id);
+            };
+
+        },
+        updateDesc: (state,action) =>{
+            const projectIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(projectIndex !== -1){
+                state[projectIndex].description = action.payload.data;
+            };
+
+        },
+        addProjectManager: (state,action)=>{
+            const projectIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
+            if(projectIndex !== -1){
+                state[projectIndex].projectManagers.push(action.payload.data);
+            };
+
+        },
+
+    },
+});
+
+
+//selectors
+
+export const selectAllProjects = (state) => state.allProjects;
+
+//This will need to use the state information of the currently logged-in user to filter
+export const selectFilteredProjects = (state) =>{
+    const allProjects = selectAllProjects(state);
+    const thisUser = selectCurrentUser(state);
+    let thisUserId = 0;
+        if(thisUser[0] !== undefined){
+         thisUserId = thisUser[0].id;;
+        }
+    console.log(allProjects.filter((project) => project.assignedUsers.findIndex((thisUserId) => thisUserId !== -1)));
+
+    //so this needs to parse allProjects, an array of project objects, whose .assignedUsers property array contains thisUserId
+
+    //this creates an infinite loop of projects being added to the state
+    return allProjects.filter((project) =>
+        project.assignedUsers.findIndex((thisUserId) => thisUserId !== -1)
+    );
+
+};
+
+//TODO
+//May also need a selector that can grab projects based on a given user's id instead of the current one logged in
+//This selector would be used to present a single user's info to an admin viewer
+
+//Exports
+export const {
+    loadProjectData,
+    addProject,
+    addComment,
+    addTicket,
+    removeTicket,
+    assignUser,
+    removeUser,
+    updateDesc,
+    addProjectManager
+
+} = allProjectsSlice.actions;
+
+export default allProjectsSlice.reducer; 
+
+
+
+

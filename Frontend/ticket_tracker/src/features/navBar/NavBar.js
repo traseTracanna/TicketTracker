@@ -12,3 +12,33 @@ Navigation bar
     Not entirely sure if this is the best way to go about this, but i'm kinda here for it. 
 
 */
+
+import React from 'react';
+
+import DataList from '../dataList/DataList';
+
+import {selectView, changeView } from './viewSlice';
+import {useSelector, useDispatch} from 'react-redux';
+
+export default function NavBar(){
+
+    
+
+    return(
+        <div className='entire-page'>
+            <div className='nav-bar'>
+                <ul className='nav-bar-item-list'>
+                    <li>Tickets</li>
+                    <li>Projects</li>
+                    <li>Overview</li>
+                    <li>Users</li>
+                </ul>
+
+            </div>
+            <div className='content'>
+                <DataList />
+            </div>
+        </div>
+    )
+};
+

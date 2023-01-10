@@ -21,3 +21,25 @@
     A data table component will consist of a TitleBar component, several DataRow components, and a DataTableNavBar component. 
     The reason i think it should be organized this way is because those components can be recycled when generating the dataList view page for projects and tickets.
 */
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+//Use this to call loadData in the slice on initial render
+import { projects } from '../../frontend_dev_data'; 
+import { loadProjectData } from './allProjectsSlice';
+
+export default function ProjectPage(){
+
+
+const dispatch = useDispatch();
+dispatch(loadProjectData(projects));
+
+
+return(
+    <div>
+        <p>test</p>
+    </div>
+
+);
+
+};

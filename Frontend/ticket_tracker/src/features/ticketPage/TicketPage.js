@@ -17,3 +17,16 @@
 
 
 */ 
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+//Use this to call loadData in the slice on initial render
+import { tickets } from '../../frontend_dev_data'; 
+import { loadData } from './allTicketsSlice';
+
+const dispatch = useDispatch();
+
+const onFirstRender = () => {
+    dispatch(loadData(tickets));
+}
+useEffect(onFirstRender, []);
