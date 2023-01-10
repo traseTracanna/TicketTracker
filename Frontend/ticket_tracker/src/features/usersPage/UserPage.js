@@ -19,7 +19,7 @@ import { loadUsersData } from './allUsersSlice';
 
 //Using this to set the current user to the first user in the array from the dev_data. 
 //Just temporary to complete an initial state for the sake of testing.
-import { setCurrentUser } from './thisUserSlice';
+import { setCurrentUser, selectCurrentUser } from './thisUserSlice';
 
 
 export default function UserPage(){
@@ -33,9 +33,25 @@ const onFirstRender = () => {
 }
 useEffect(onFirstRender, []);
 
+const currentUser = useSelector(selectCurrentUser);
+console.log(currentUser);
+
+const loader = () =>{
+        if(currentUser.length !== 0){
+                return <p>Current user = {currentUser[0].name}, {currentUser[0].id}</p>
+        } else{
+                return <p>no gamers in the chat</p>;
+        }
+}
+
+
 return(
         <div>
                 <p>User Page Test</p>
+                <div>
+                        {loader()}
+                </div>
+                
         </div> 
 )
 

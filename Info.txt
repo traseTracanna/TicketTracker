@@ -421,4 +421,4 @@ I think my immediate goal should be to
 
     Aim to finish this ^ by 1/17 ( 6 days ) 
 
-    This will leave 5 days for back end, including weekends. 
+    This will leave 5 days for back end and design, including weekends. 

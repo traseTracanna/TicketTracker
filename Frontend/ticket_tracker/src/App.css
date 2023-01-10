@@ -37,3 +37,20 @@
     transform: translateY(0px);
   }
 }
+
+.title-bar li, .data-row li{
+  flex-grow: 1;
+    padding: 20px;
+    align-items: center;
+
+}
+
+.title-bar, .data-row {
+  display: flex;
+  list-style-type: none;
+  align-items: stretch;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+}

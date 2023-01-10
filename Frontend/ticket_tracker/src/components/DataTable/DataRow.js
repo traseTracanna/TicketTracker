@@ -10,13 +10,13 @@ export default function DataRow({dataItem, dataType}){
         case 'project':
             return (
                 <div className="data-row">
-                    <ul>
+                    <ul className="data-row">
                         <li>{dataItem.name}</li>
                         <li>{dataItem.description}</li>
                         <li>{dataItem.dateCreated}</li>
                         <li>{dataItem.listOfTickets.length}</li>
-                        <li>{dataItem.projectManagers}</li>
-                        <li>{dataItem.createdBy}</li>
+                        <li>{dataItem.projectManagers[0].name}</li>
+                        <li>{dataItem.createdBy.name}</li>
                     </ul>
         
                 </div>
@@ -24,14 +24,14 @@ export default function DataRow({dataItem, dataType}){
         case 'ticket':
             return (
                 <div className="data-row">
-                    <ul>
+                    <ul className="data-row">
                         <li>{dataItem.name}</li>
                         <li>{dataItem.description}</li>
                         <li>{dataItem.type}</li>
                         <li>{dataItem.priority}</li>
                         <li>{dataItem.dateCreated}</li>
                         <li>{dataItem.associatedProject}</li>
-                        <li>{dataItem.createdBy}</li>
+                        <li>{dataItem.createdBy.name}</li>
                     </ul>
         
                 </div>

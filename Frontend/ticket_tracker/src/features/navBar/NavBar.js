@@ -16,11 +16,26 @@ Navigation bar
 import React from 'react';
 
 import DataList from '../dataList/DataList';
+import ProjectPage from '../projectPage/ProjectPage';
+import TicketPage from '../ticketPage/TicketPage';
 
 import {selectView, changeView } from './viewSlice';
 import {useSelector, useDispatch} from 'react-redux';
 
+import { changeListType } from '../dataList/dataListSlice';
+
 export default function NavBar(){
+
+    const dispatch = useDispatch();
+
+    const dataListToTickets = () =>{
+        dispatch(changeListType('ticket'))
+
+    }
+
+    const dataListToProjects = () =>{
+        dispatch(changeListType('project'));
+    }
 
     
 
@@ -28,15 +43,16 @@ export default function NavBar(){
         <div className='entire-page'>
             <div className='nav-bar'>
                 <ul className='nav-bar-item-list'>
-                    <li>Tickets</li>
-                    <li>Projects</li>
+                    <li onClick={dataListToTickets}>Tickets</li>
+                    <li onClick={dataListToProjects}>Projects</li>
                     <li>Overview</li>
                     <li>Users</li>
                 </ul>
 
             </div>
             <div className='content'>
-                <DataList />
+                {/*<DataList />*/}
+                <ProjectPage />
             </div>
         </div>
     )

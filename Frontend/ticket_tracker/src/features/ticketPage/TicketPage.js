@@ -20,13 +20,40 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import  ItemAssignedUsers from '../../components/DataItem/ItemAssignedUsers';
+import  ItemComments from '../../components/DataItem/ItemComments';
+import  ItemDescription from '../../components/DataItem/ItemDescription';
+
 //Use this to call loadData in the slice on initial render
 import { tickets } from '../../frontend_dev_data'; 
-import { loadData } from './allTicketsSlice';
+import { loadTicketData } from './allTicketsSlice';
+
+export default function TicketPage(){
+
 
 const dispatch = useDispatch();
 
 const onFirstRender = () => {
-    dispatch(loadData(tickets));
+    dispatch(loadTicketData(tickets));
 }
 useEffect(onFirstRender, []);
+
+return(
+    <div className="ticket-page">
+        <div className="ticket-header">
+            <ItemDescription />
+        </div>
+        <div className="assigned-users-list">
+            <ItemAssignedUsers />
+        </div>
+        <div className="comment-box">
+            <ItemComments />
+        </div>
+        
+    </div>
+
+
+
+)
+
+}

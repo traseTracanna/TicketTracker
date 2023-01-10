@@ -20,7 +20,7 @@ export default function TitleBar({dataType}){
     return (
         <div className="title-bar">
             <div className="column-title-list">
-                <ul>
+                <ul className="title-bar">
                     {columnHeadings.map((heading) => <li>{heading}</li>)}
                 </ul>
             </div>

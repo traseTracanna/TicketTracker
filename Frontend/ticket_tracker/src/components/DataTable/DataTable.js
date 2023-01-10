@@ -22,9 +22,9 @@ export default function DataTable({content, type}) {
     return(
         <div className="data-table">
             <TitleBar dataType={type}/> 
-                {content.map((dataItem) =>{
+                {content.map((dataItem) =>
                     <DataRow dataItem={dataItem} dataType={type} />
-                })}
+                )}
             <DataTableNavBar /> 
         </div>
     )

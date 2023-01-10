@@ -98,15 +98,24 @@ export const selectAllTickets = (state) => state.allTickets;
 export const selectFilteredTickets = (state) =>{
     const allTickets = selectAllTickets(state);
     const thisUser = selectCurrentUser(state);
-    const thisUserId = thisUser.id;
+    let thisUserId = 0;
+    if(thisUser[0] !== undefined){
+        thisUserId = thisUser[0].id;
+
+    }
 
     //so this needs to parse allTickets, an array of project objects, whose .assignedUsers property array contains thisUserId
 
-    return allTickets.filter((ticket) =>
-        ticket.assignedUsers.findIndex(thisUserId) !== -1
+    return allTickets.filter((ticket) => ticket.assignedUsers.findIndex((assignedUser) => assignedUser.id === thisUserId) !== -1
     );
 
 };
+
+export const selectTicketById = id => state =>{
+    const allTickets = selectAllTickets(state);
+
+    return allTickets.filter((ticket) => ticket.id === id)
+}
 
 //Exports: 
 

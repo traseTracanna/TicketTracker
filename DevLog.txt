@@ -130,3 +130,21 @@
     So my goal for wednesday is to have the dataList page, the ProjectPage and TicketPage all fully functional, along with the NavBar to switch between the three. 
     Meaning my goal for tomorrow will be to get the dataList page working correctly, and then start working on the components for the Project and Ticket Pages 
     Then wednesday would be finishing the Project and Ticket pages and employing the navbar functionality.
+
+1/10/23:
+    Feeling incredibly unmotivated today, but in only about 40 minutes of work I've already fixed the display errors I was getting at the end of yesterday. 
+    So, in theory I have the data list page working as intended, and even added functionality to switch between projects and tickets view when clicking on the nav bar items,
+        but i'm worried that my functionality is a little hacky and may cause issues for trouble shooting down the line. 
+    
+    I still think it would be wise to make a separate class or whatever you want to call it that is primarily responsible for loading all the data on initial load
+    but I also think this should be secondary to continuing to get functionality to pop off. I want to keep moving forward here instead of getting stunlocked in trying to refactor
+    halfway through making the program. Halfway is even generous, but you know what i mean.
+        The consequence of this, i recognize, will be having more plates to keep balanced when trying to refactor later, but isn't that just the way she goes. 
+
+    I still don't have sorting really figured out in any sense, as i feel this will be a major challenge. But i'm thinking i'll just stick to the plan I wrote for myself yesterday
+    and try to build the components for displaying a project's or ticket's information on their specific page. 
+        It is just now occuring to me that i'm not really sure how i'm going to employ switching to that view. Something like clicking on the ticket/project name in the dataList row
+        and then being redirected to the full page view of all their details/assignedUsers/comments etc.
+        Maybe i will have to build another selector for projects and tickets that can grab the data from one based on that button click, and load it into the corresponding components
+        while simultaenously updating the view state. 
+            Truly the further i get into this, the more messy it all feels. 

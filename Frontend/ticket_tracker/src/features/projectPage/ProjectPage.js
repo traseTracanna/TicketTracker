@@ -23,10 +23,14 @@
 */
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import  ItemAssignedUsers from '../../components/DataItem/ItemAssignedUsers';
+import  ItemComments from '../../components/DataItem/ItemComments';
+import  ItemDescription from '../../components/DataItem/ItemDescription';
+import  DataTable  from '../../components/DataTable/DataTable';
 
 //Use this to call loadData in the slice on initial render
 import { projects } from '../../frontend_dev_data'; 
-import { loadProjectData } from './allProjectsSlice';
+import { loadProjectData, selectProjectById } from './allProjectsSlice';
 
 export default function ProjectPage(){
 
@@ -34,10 +38,25 @@ export default function ProjectPage(){
 const dispatch = useDispatch();
 dispatch(loadProjectData(projects));
 
+//const currentProject = useSelector(selectProjectById('fp0001'));
+
 
 return(
-    <div>
-        <p>test</p>
+    <div className="project-page">
+        <div className="project-header">
+            <ItemDescription />
+
+        </div>
+        <div className="assigned-users-list">
+            <ItemAssignedUsers />
+        </div>
+        {/*<div className="project-tickets-list">
+            <DataTable />
+        </div>*/}
+        <div className="comment-box">
+            <ItemComments />
+        </div>
+        
     </div>
 
 );

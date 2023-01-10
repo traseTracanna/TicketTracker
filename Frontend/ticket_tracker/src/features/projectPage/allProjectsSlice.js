@@ -109,18 +109,23 @@ export const selectFilteredProjects = (state) =>{
     const thisUser = selectCurrentUser(state);
     let thisUserId = 0;
         if(thisUser[0] !== undefined){
-         thisUserId = thisUser[0].id;;
+         thisUserId = thisUser[0].id;
+
         }
-    console.log(allProjects.filter((project) => project.assignedUsers.findIndex((thisUserId) => thisUserId !== -1)));
+    //console.log(allProjects.filter((project) => project.assignedUsers.findIndex((assignedUser) => assignedUser.id === thisUserId)));
 
     //so this needs to parse allProjects, an array of project objects, whose .assignedUsers property array contains thisUserId
 
-    //this creates an infinite loop of projects being added to the state
-    return allProjects.filter((project) =>
-        project.assignedUsers.findIndex((thisUserId) => thisUserId !== -1)
-    );
+    return allProjects.filter((project) => project.assignedUsers.findIndex((assignedUser) => assignedUser.id === thisUserId) !== -1);
 
 };
+
+
+export const selectProjectById = id => state =>{
+    const allProjects = selectAllProjects(state);
+
+    return allProjects.filter((project) => project.id === id)
+}
 
 //TODO
 //May also need a selector that can grab projects based on a given user's id instead of the current one logged in

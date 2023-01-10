@@ -51,6 +51,19 @@ const fakeTicket1 = {
     id: 'ft0001'
 };
 
+const fakeTicket2 = {
+    name: 'fakeTicket 2',
+    description: 'This is the second fake ticket.',
+    type: 'feature addition',
+    priority: 'high',
+    dateCreated: '1/10/23',
+    associatedProject: '',
+    createdBy: fakeUser1,
+    assignedUsers: [fakeUser2, fakeUser3],
+    comments: [fakeComment1, fakeComment2],
+    id: 'ft0002'
+};
+
 const fakeProject1 ={
     name: 'fakeProject1',
     description: 'This is the first fake project.',
@@ -59,7 +72,7 @@ const fakeProject1 ={
     createdBy: fakeUser1,
     assignedUsers: [fakeUser1, fakeUser2, fakeUser3],
     comments: [fakeComment1, fakeComment2],
-    listOfTickets: [fakeTicket1],
+    listOfTickets: [fakeTicket1, fakeTicket2],
     id: 'fp0001' 
 };
 
@@ -67,14 +80,18 @@ const fakeProject2 ={
     name: 'fakeProject2',
     description: 'This is the second fake project.',
     dateCreated: '1/9/23',
-    projectManagers: [fakeUser1],
-    createdBy: fakeUser1,
-    assignedUsers: [fakeUser1, fakeUser2, fakeUser3],
+    projectManagers: [fakeUser2],
+    createdBy: fakeUser2,
+    assignedUsers: [fakeUser1, fakeUser3],
     comments: [fakeComment1, fakeComment2],
+    listOfTickets: [fakeTicket1],
     id: 'fp0003' 
 };
 
-fakeTicket1.associatedProject = fakeProject1;
+
+//For some reason, having the project object as a part of the ticket object list of things causes infinite recursion when trying to load this data. This may not be a problem, however,
+//when data will be loaded from the data base. 
+//fakeTicket1.associatedProject = fakeProject1;
 
 
 
@@ -104,7 +121,7 @@ export const arr1 = [{test: 'test', number: 'number'}, {test: 'test2', number: '
 
 const projects = an array of project objects
 */
-export const projects = [fakeProject2];
+export const projects = [fakeProject2, fakeProject1];
 
 
 /* A ticket object has:
@@ -131,7 +148,7 @@ export const projects = [fakeProject2];
 
 const tickets = an array of ticket objects
 */
-export const tickets = [fakeTicket1];
+export const tickets = [fakeTicket1, fakeTicket2];
 
 
 /* A comment object has:

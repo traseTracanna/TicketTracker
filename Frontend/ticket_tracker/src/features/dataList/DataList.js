@@ -57,8 +57,8 @@ import DataTable from '../../components/DataTable/DataTable';
 import ProjectPage from '../projectPage/ProjectPage';
 import UserPage from '../usersPage/UserPage';
 
-import { selectAllTickets, selectFilteredTickets, loadTicketData } from '../ticketPage/allTicketsSlice';
-import { selectAllProjects, selectFilteredProjects, loadProjectData } from '../projectPage/allProjectsSlice'; 
+import { selectAllTickets, selectFilteredTickets, loadTicketData, selectTicketById } from '../ticketPage/allTicketsSlice';
+import { selectAllProjects, selectFilteredProjects, loadProjectData, selectProjectById } from '../projectPage/allProjectsSlice'; 
 import { selectDataListState } from './dataListSlice';
 import { selectCurrentUser } from '../usersPage/thisUserSlice';
 
@@ -91,8 +91,15 @@ export default function DataList(){
         //calling this with a project object that has a 'listOfTickets' property causes a stack overflow
         //I think it's related to how selectFilteredTickets works
         dispatch(loadProjectData(projects));
+        dispatch(loadTicketData(tickets));
     };
     useEffect(onInitialLoad, []);
+
+
+    //Examples of selecting a single project/ticket by id for hte sake of rendering a single project/ticket page
+    //I guess this code doesn't really belong in here, but at least it exists for me to find eventually
+    console.log(useSelector(selectTicketById('ft0001')));
+    console.log(useSelector(selectProjectById('fp0001')));
 
 
 
