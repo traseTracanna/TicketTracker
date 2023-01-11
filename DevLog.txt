@@ -166,3 +166,21 @@
         2) Work on beautifying the pages i have working so far
         3) Implementing functionality of loading a project/ticket page when clicking on their name from a dataList 
         4) Start thinking about how new projects/tickets/comments can be created and updated, and how users can be added to these things as well. 
+
+1/11/23:
+    I have again made decent progress in little time so far today.
+    I was able to make the nav bar fully functional, along with making the names of projects/tickets clickable from dataList view to load their individual details.
+        The way I went about this felt like i was doing it pretty messily, by having a function in my nice clean DataRow component to set the view state and assign the current
+        ticket/project to the one that was clicked, but it works so I mean. I can always refactor later. 
+
+    I"m not sure what i want to work on next. It would be probably wise to spend some time trying to make the way that pages are displayed actually somewhat readable instead
+    of the messy jumble of text they currently are, but html and css are so puttsy that i'm kind of ok just pushing that part off for now. 
+
+    The other things i need to still figure out this week are  
+        1) for sure i need to start building functionality for adding new tickets/projects/comments etc. 
+        2) Making the lists of dataList view actually sortable -- something i've been avoiding because i know i will likely butt heads with algorithmic sorting. 
+            The reason i think this is mostly because of how messy my objects are, that just pulling out the value to sort by for each object seems daunting. Tho i'm probably  
+            just making it a bigger deal than it actually is.
+
+    either way, i'm pretty satisfied that i've been able to create this level of functionality in only a short amount of time. From having no code written monday morning to having
+    what i do now feels very satisfying. 

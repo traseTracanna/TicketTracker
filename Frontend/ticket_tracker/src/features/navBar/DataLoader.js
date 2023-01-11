@@ -26,7 +26,7 @@ const onInitialLoad = () => {
     dispatch(loadProjectData(projects));
     dispatch(loadTicketData(tickets));
     dispatch(loadUsersData(users));
-    dispatch(setCurrentUser(users[0]));
+    dispatch(setCurrentUser(users[1]));
 };
 useEffect(onInitialLoad, []);
 

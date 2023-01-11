@@ -7,16 +7,25 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const viewSlice = createSlice({
     name: "view",
-    initialState: "homepage",
+    initialState: { view: "homepage", currentProject: [], currentTicket: []},
     reducers: {
         changeView: (state, action) =>{
-            state = action.payload; 
+            state.view = action.payload; 
         },
+        setProject: (state, action) =>{
+            state.currentProject = action.payload;
+        },
+        setTicket: (state, action) =>{
+            state.currentTicket = action.payload;
+        }
     },
 });
 
 export const selectView = (state) => state.view; 
 
-export const { changeView } = viewSlice.actions;
+export const selectCurrentProject = (state) => state.view.currentProject;
+export const selectCurrentTicket = (state) => state.view.currentTicket;
+
+export const { changeView, setProject, setTicket } = viewSlice.actions;
 
 export default viewSlice.reducer;

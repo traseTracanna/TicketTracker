@@ -25,13 +25,15 @@ import  ItemComments from '../../components/DataItem/ItemComments';
 import  ItemDescription from '../../components/DataItem/ItemDescription';
 
 import { selectTicketById } from './allTicketsSlice';
+import { selectCurrentTicket } from '../navBar/viewSlice';
 
 export default function TicketPage(){
 
 
 const dispatch = useDispatch();
 
-let currentTicket = useSelector(selectTicketById('ft0001'));
+//let currentTicket = useSelector(selectTicketById('ft0001'));
+let currentTicket = useSelector(selectCurrentTicket);
 console.log(currentTicket);
 
 

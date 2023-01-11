@@ -18,6 +18,7 @@ import React from 'react';
 import DataList from '../dataList/DataList';
 import ProjectPage from '../projectPage/ProjectPage';
 import TicketPage from '../ticketPage/TicketPage';
+import UserPage from '../usersPage/UserPage';
 import DataLoader from './DataLoader';
 
 import {selectView, changeView } from './viewSlice';
@@ -29,13 +30,41 @@ export default function NavBar(){
 
     const dispatch = useDispatch();
 
-    const dataListToTickets = () =>{
-        dispatch(changeListType('ticket'))
+    const currentView = useSelector(selectView);
+
+    const switchView = (newView) => {
+        
+        switch(newView){
+            case 'project':
+            case 'ticket':
+                dispatch(changeView('dataList'));
+                dispatch(changeListType(newView));
+                break;
+            default:
+                dispatch(changeView(newView));
+                break;
+        }
+        
 
     }
 
-    const dataListToProjects = () =>{
-        dispatch(changeListType('project'));
+    const contentDisplayHelper = () =>{
+        
+            switch(currentView.view){
+                case 'homepage':
+                        return <h1>Homepage</h1>;
+                case 'users':
+                    return <UserPage />;
+                case 'dataList':
+                    return <DataList />;
+                case 'ticketPage':
+                    return <TicketPage />;
+                case 'projectPage':
+                    return <ProjectPage />;
+                default:
+                    return <h1>default view</h1>;
+            }
+            
     }
 
     
@@ -44,18 +73,16 @@ export default function NavBar(){
         <div className='entire-page'>
             <div className='nav-bar'>
                 <ul className='nav-bar-item-list'>
-                    <li onClick={dataListToTickets}>Tickets</li>
-                    <li onClick={dataListToProjects}>Projects</li>
-                    <li>Overview</li>
-                    <li>Users</li>
+                    <li onClick={() =>switchView('ticket')}>Tickets</li>
+                    <li onClick={() =>switchView('project')}>Projects</li>
+                    <li onClick={() =>switchView('homepage')}>Overview</li>
+                    <li onClick={() =>switchView('users')}>Users</li>
                 </ul>
 
             </div>
             <div className='content'>
                 <DataLoader />
-                {/*<DataList />*/}
-                {/*<ProjectPage />*/}
-                <TicketPage />
+                {contentDisplayHelper()}
             </div>
         </div>
     )

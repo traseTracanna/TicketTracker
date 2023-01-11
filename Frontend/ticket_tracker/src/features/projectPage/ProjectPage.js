@@ -30,6 +30,7 @@ import  DataTable  from '../../components/DataTable/DataTable';
 
 //Use this to call loadData in the slice on initial render
 import { selectProjectById } from './allProjectsSlice';
+import { selectCurrentProject } from '../navBar/viewSlice';
 
 export default function ProjectPage(){
 
@@ -37,7 +38,8 @@ export default function ProjectPage(){
 const dispatch = useDispatch();
 
 
-let currentProject = useSelector(selectProjectById('fp0001'));
+//let currentProject = useSelector(selectProjectById('fp0001'));
+let currentProject = useSelector(selectCurrentProject);
 console.log(currentProject);
 
 //Without this, the page breaks on initial load, as it is trying to read an undefined value from currentProject while the data loads. QQ make it make sense

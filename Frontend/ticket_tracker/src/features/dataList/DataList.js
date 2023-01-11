@@ -90,8 +90,8 @@ export default function DataList(){
 
     //Examples of selecting a single project/ticket by id for hte sake of rendering a single project/ticket page
     //I guess this code doesn't really belong in here, but at least it exists for me to find eventually
-    console.log(useSelector(selectTicketById('ft0001')));
-    console.log(useSelector(selectProjectById('fp0001')));
+    //console.log(useSelector(selectTicketById('ft0001')));
+    //console.log(useSelector(selectProjectById('fp0001')));
 
 
 
