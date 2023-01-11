@@ -4,8 +4,8 @@ import React from 'react';
 
 export default function DataTableNavBar(){
     return(
-        <div className='data-table-nav-bar'>
-            <p>page 1</p>
-        </div>
+        <tr className='data-table-nav-bar'>
+            <td>page 1</td>
+        </tr>
     )
 };

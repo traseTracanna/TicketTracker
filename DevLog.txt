@@ -184,3 +184,11 @@
 
     either way, i'm pretty satisfied that i've been able to create this level of functionality in only a short amount of time. From having no code written monday morning to having
     what i do now feels very satisfying. 
+
+    Okay, i decided to spend some time doing HTML/CSS stuff and i think it's payed off so far. I just sort of copied examples from the w3schools docs to make the data tables 
+        actually look kind of nice. I still haven't approached the individual ticket/project pages, but maybe that's something I can work on this weekend or something. 
+
+    My goals for tomorrow:
+        1) Functionality for adding/updating new data. Even if i get nothing else done, having this working would be huge
+        2) If i have time, it would be worthwhile to start working on data sorting algorithms. I made a new file dataSorting.js where these methods would be housed
+            and even if i just started trying to get one type to work it would be a big step towards figuring out the rest. 

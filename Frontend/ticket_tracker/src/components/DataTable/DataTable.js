@@ -21,12 +21,18 @@ export default function DataTable({content, type}) {
 
 
     return(
-        <div className="data-table">
-            <TitleBar dataType={type}/> 
+        <table className="data-table">
+            <thead>
+                <TitleBar dataType={type}/> 
+            </thead>
+            <tbody>
                 {content.map((dataItem) =>
                     <DataRow dataItem={dataItem} dataType={type} />
                 )}
-            <DataTableNavBar /> 
-        </div>
+            </tbody>
+            <tfoot>
+                <DataTableNavBar /> 
+            </tfoot>
+        </table>
     )
 }

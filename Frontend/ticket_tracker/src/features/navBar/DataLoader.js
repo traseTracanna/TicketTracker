@@ -30,8 +30,4 @@ const onInitialLoad = () => {
 };
 useEffect(onInitialLoad, []);
 
-return (
-    <p>data loaded</p>
-);
-
 }

@@ -38,14 +38,15 @@
   }
 }
 
-.title-bar li, .data-row li{
+.nav-bar li{
   flex-grow: 1;
     padding: 20px;
     align-items: center;
-
 }
 
-.title-bar, .data-row {
+
+
+.nav-bar-item-list{
   display: flex;
   list-style-type: none;
   align-items: stretch;
@@ -53,4 +54,20 @@
   margin: 0;
   width: 100%;
 
+}
+
+td, th{
+  border: 1px solid #ddd;
+  padding: 8px;
+
+}
+
+th{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+
+.data-table{
+  margin: auto;
 }

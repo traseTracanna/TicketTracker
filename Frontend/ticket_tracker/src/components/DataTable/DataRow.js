@@ -27,43 +27,35 @@ export default function DataRow({dataItem, dataType}){
     switch(dataType){
         case 'project':
             return (
-                <div className="data-row">
-                    <ul className="data-row">
-                        <li onClick={() => singlePageLoader('project')}>{dataItem.name}</li>
-                        <li>{dataItem.description}</li>
-                        <li>{dataItem.dateCreated}</li>
-                        <li>{dataItem.listOfTickets.length}</li>
-                        <li>{dataItem.projectManagers[0].name}</li>
-                        <li>{dataItem.createdBy.name}</li>
-                    </ul>
-        
-                </div>
+                    <tr className="data-row">
+                        <td onClick={() => singlePageLoader('project')}>{dataItem.name}</td>
+                        <td>{dataItem.description}</td>
+                        <td>{dataItem.dateCreated}</td>
+                        <td>{dataItem.listOfTickets.length}</td>
+                        <td>{dataItem.projectManagers[0].name}</td>
+                        <td>{dataItem.createdBy.name}</td>
+                    </tr> 
             )
         case 'ticket':
             return (
-                <div className="data-row">
-                    <ul className="data-row">
-                        <li onClick={() => singlePageLoader('ticket')}>{dataItem.name}</li>
-                        <li>{dataItem.description}</li>
-                        <li>{dataItem.type}</li>
-                        <li>{dataItem.priority}</li>
-                        <li>{dataItem.dateCreated}</li>
-                        <li>{dataItem.associatedProject}</li>
-                        <li>{dataItem.createdBy.name}</li>
-                    </ul>
-        
-                </div>
+                    <tr className="data-row">
+                        <td onClick={() => singlePageLoader('ticket')}>{dataItem.name}</td>
+                        <td>{dataItem.description}</td>
+                        <td>{dataItem.type}</td>
+                        <td>{dataItem.priority}</td>
+                        <td>{dataItem.dateCreated}</td>
+                        <td>{dataItem.associatedProject}</td>
+                        <td>{dataItem.createdBy.name}</td>
+                    </tr>
             )
         case 'projectTickets':
             return(
-                <div className="data-row">
-                    <ul className="data-row">
-                        <li onClick={() => singlePageLoader('ticket')}>{dataItem.name}</li>
-                        <li>{dataItem.priority}</li>
-                        <li>{dataItem.dateCreated}</li>
-                        <li>{dataItem.createdBy.name}</li>
-                    </ul>
-                </div>
+                    <tr className="data-row">
+                        <td onClick={() => singlePageLoader('ticket')}>{dataItem.name}</td>
+                        <td>{dataItem.priority}</td>
+                        <td>{dataItem.dateCreated}</td>
+                        <td>{dataItem.createdBy.name}</td>
+                    </tr>
             )
 
 
@@ -72,10 +64,10 @@ export default function DataRow({dataItem, dataType}){
     //default case for testing purposes
     return (
         <div className="data-row">
-            <ul>
-                <li>{dataItem.name}</li>
-                <li>{dataItem.description}</li>
-            </ul>
+            <tr>
+                <td>{dataItem.name}</td>
+                <td>{dataItem.description}</td>
+            </tr>
 
         </div>
     )
