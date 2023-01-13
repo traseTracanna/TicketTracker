@@ -36,6 +36,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { selectCurrentUser } from '../usersPage/thisUserSlice';
 
 
+
 export const allTicketsSlice = createSlice({
     name: "allTickets",
     initialState: [],
@@ -80,10 +81,14 @@ export const allTicketsSlice = createSlice({
             };
 
         },
-        addComment: (state,action) =>{
+        addTicketComment: (state,action) =>{
             const ticketIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
             if(ticketIndex !== -1){
+                //const newComments = state[ticketIndex].comments
+                //newComments.push(action.payload.data);
+                //state[ticketIndex].comments = newComments;
                 state[ticketIndex].comments.push(action.payload.data);
+
             };
 
         },
@@ -93,7 +98,10 @@ export const allTicketsSlice = createSlice({
 
 //Selectors
 
+
+
 export const selectAllTickets = (state) => state.allTickets;
+
 
 export const selectFilteredTickets = (state) =>{
     const allTickets = selectAllTickets(state);
@@ -121,7 +129,7 @@ export const selectTicketById = id => state =>{
 
 export const {
     loadTicketData,
-    addComment,
+    addTicketComment,
     addTicket,
     removeTicket,
     assignUser,

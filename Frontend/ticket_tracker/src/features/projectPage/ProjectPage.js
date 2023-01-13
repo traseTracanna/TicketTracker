@@ -60,11 +60,11 @@ return(
         <div className="assigned-users-list">
             <ItemAssignedUsers assignedUsers={currentProject.assignedUsers}/>
         </div>
-        {<div className="project-tickets-list">
+        <div className="project-tickets-list">
             <DataTable content={currentProject.listOfTickets} type={'projectTickets'}/>
-        </div>}
+        </div>
         <div className="comment-box">
-            <ItemComments commentsArray={currentProject.comments}/>
+            <ItemComments dataObject={currentProject} dataType={'project'}/>
         </div>
         
     </div>

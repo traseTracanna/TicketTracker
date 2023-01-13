@@ -45,7 +45,7 @@ export const allProjectsSlice = createSlice({
         addProject: (state, action) =>{
             state.push(action.payload); 
         },
-        addComment: (state, action) =>{
+        addProjectComment: (state, action) =>{
             const projectIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
             if(projectIndex !== -1){
                 state[projectIndex].comments.push(action.payload.data);
@@ -135,7 +135,7 @@ export const selectProjectById = id => state =>{
 export const {
     loadProjectData,
     addProject,
-    addComment,
+    addProjectComment,
     addTicket,
     removeTicket,
     assignUser,

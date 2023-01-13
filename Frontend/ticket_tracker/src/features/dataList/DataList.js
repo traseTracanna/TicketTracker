@@ -109,7 +109,6 @@ export default function DataList(){
     return(
         <div className="data-list-page">
             <DataTable content={sortedList} type={listType} />
-            <UserPage />
         </div>
     )
 }

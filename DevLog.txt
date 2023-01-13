@@ -192,3 +192,74 @@
         1) Functionality for adding/updating new data. Even if i get nothing else done, having this working would be huge
         2) If i have time, it would be worthwhile to start working on data sorting algorithms. I made a new file dataSorting.js where these methods would be housed
             and even if i just started trying to get one type to work it would be a big step towards figuring out the rest. 
+
+1/12/23:
+    I actually got to work right away today, but unfortunately i have been struggling. 
+    I"ve been working on getting updates to work, specifically only for the 'isAdmin' property of users. I was trying to think of a way to do it where the dataList table of 
+    users could be a form that would only be updated to the server when a 'submit' button was pressed, but was having trouble seeing my changes reflected in the dom without
+    immediately updating the 'isAdmin' flag in the state. 
+    The reason i'm concerned aobut this is that i don't want the checkboxes for 'isAdmin' to be abused by spam clicking and effectively destroying the server. 
+        I'm thinking that maybe clicking a checkbox could update the state directly, but not until a submit button is pressed would it actually be updated in the db? 
+        The biggest issue i'm having with this is refactoring how a dataList data table is created to accomodate for being inside of a <form> tag. 
+        Its mostly just that this is the only data table i have that needs to be a form, and so i don't want the other ones to have a random submit button. But at least for now,
+        this does work so maybe i can just circle back to it later if I feel it needs to be changed.
+
+        Anyways, in theory lets say i get the form thing sorted.
+            When a checkbox is selected it could add that dataItem (user object) to an array within the dataRow component class (again, this is a gross place to have this but I knew
+                the hackiness would arrise somewhere).
+            Then onSubmit would call a function that analyzes the userObjects in the state to determine their current isAdmin value, but would only look at those with ids that had been
+             added to the array.
+            Or maybe 'analyzes' is not the right word. What it would really do is send the list of userObjects to the server to have their values updated to match what is currently 
+                in the state at the point the 'submit' button is pressed. 
+                By just sending all the objects that were touched, even if their final value isn't changed, i think it would be more efficient than digging through the allUsers 
+                    slice of state and then making comparisons. 
+                    In fact, i don't even know how I would make those comparisons without creating another temporary list of previous state or calling the server to verify. 
+                        So i guess the efficiency is trading space for a temporary array and time for searching through the state and making comparisons for more transactions
+                        to the data base. 
+
+    The other major concern i'm having is where my server calls are going to live. 
+        I don't really want them to be spread out all over the place, and i think it would be wise to keep them all in one file, but i'm not really sure how this would work.
+        Maybe every call i need to make to a server is just a method that can be referenced with the appropriate data via arguments in the file that needs to call to the server,
+        but the actual fetch's themselves would live in their own separate file. 
+    
+    But onwards and upwards. Next i need to make an input box with submission capability for the comments section of individual pages. 
+
+    Well i did make it possible to add comments to a ticket or a project, but i can't get the view store to update it's current data object to match that what is in the store
+    after a new comment is added. 
+    I think this is probably because of how my viewSlice is initially fed currentTicket/currentProject by sending it a reference to an object via components/DataTable/DataRow 
+    instead of having it grab that currentTicket from the state. 
+    I set up infrastructure to do it like this with selectTicketById, but the reason i ended up doing it the way i did was to get data to load how i needed it to 
+    when the view switches to a single ticket/project page.
+        As in, from dataList view, how do you send the id of the ticket/project page's name that you clicked on so TicketPage/ProjectPage can load the data that they need? 
+        The only way i could think of is by having a thisTicket and thisProject slice of state to manage those things, but instead i've kind of shoehorned that functionality
+        into the view state.
+
+    It's just weird that when you update the state of a user being an admin, it re-renders the whole user page data table to reflect the changes in the state.
+    Okay i guess it's not weird, cause we're updating the contents of the state of the comments section, not updating its value. 
+
+    I've just discovered that it almost works. It only updates the displayed state after you send a second comment. 
+        so the comments are like: 
+            initial state, display: [comment1, comment2]
+            add comment 3:
+            state: [comment1, comment2, comment3]
+            display: [comment1, comment2]
+            add comment 4:
+            state: [comment1, comment2, comment3, comment4]
+            display: [comment1, comment2, comment3]
+
+        And i'm not sure why !
+
+    Honestly, i'm also worried about clearing the form after the comment is submitted. It's so hard to find simple ways to do things when everyone is using different libraries.
+    In react, people use react state to control the value of a text field as it is being updated, and then can clear it from an onSubmit function which gets the data from the state.
+    In redux tk, i don't want to create an entire slice of state to handle this one simple input box, nor do i want to convalute the state of the application by layering on React
+    states with the store i already have.
+        Okay i just looked into it and using local state values to control things like form data seems to be fair game.
+
+    I think what i need to do first, however, to start solving this issue is moving the comment input form into its own component.
+
+    I could also just move on and come back to comments later. I still need to figure out components for 
+        1) adding users to projects/tickets
+        2) creating new projects/tickets
+        3) updating project/ticket info
+        It is nice to see i at least tried to help myself out in the past by writing reducer actions to handle these things. 
+        Really what was just screwing me over today is the way in which redux sees the state being updated and how it re-renders components accordingly.

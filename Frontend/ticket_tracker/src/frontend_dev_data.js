@@ -24,6 +24,24 @@ const fakeUser3 = {
     isAdmin: false
 };
 
+const fakeUser4 = {
+    name: 'Kali Ma',
+    id: '10203',
+    isAdmin: false
+};
+
+const fakeUser5 = {
+    name: 'Digadango Senior',
+    id: '00001',
+    isAdmin: true
+};
+
+const fakeUser6 = {
+    name: 'Sriracha Jones',
+    id: '56709',
+    isAdmin: false
+};
+
 const fakeComment1 = {
     createdBy: fakeUser1,
     dateCreated: '1/6/23',
@@ -153,7 +171,7 @@ export const tickets = [fakeTicket1, fakeTicket2];
 
 /* A comment object has:
     * created by
-        A user's id
+        A user Object
     * date created
         A data object or something
     * comment text
@@ -171,6 +189,6 @@ export const tickets = [fakeTicket1, fakeTicket2];
 
 const users = an array of user objects
 */ 
-export const users = [fakeUser1, fakeUser2, fakeUser3];
+export const users = [fakeUser1, fakeUser2, fakeUser3, fakeUser4, fakeUser5, fakeUser6];
 
 

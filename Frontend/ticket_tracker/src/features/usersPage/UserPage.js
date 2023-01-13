@@ -16,10 +16,14 @@ import { useSelector } from 'react-redux';
 
 import { selectCurrentUser } from './thisUserSlice';
 
+import { selectAllUsers } from './allUsersSlice';
+
+import  DataTable  from '../../components/DataTable/DataTable';
+
 
 export default function UserPage(){
 
-
+        const allUsers = useSelector(selectAllUsers);
         const currentUser = useSelector(selectCurrentUser);
 
         const loader = () =>{
@@ -34,9 +38,14 @@ export default function UserPage(){
         return(
                 <div>
                         <p>User Page Test</p>
+                        <div className="users-list">
+                                <DataTable content={allUsers} type={'users'}/>
+                        </div>
+
                         <div>
                                 {loader()}
                         </div>
+                        
                         
                 </div> 
         )

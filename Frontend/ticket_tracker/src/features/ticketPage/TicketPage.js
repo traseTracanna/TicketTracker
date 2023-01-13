@@ -24,8 +24,8 @@ import  ItemAssignedUsers from '../../components/DataItem/ItemAssignedUsers';
 import  ItemComments from '../../components/DataItem/ItemComments';
 import  ItemDescription from '../../components/DataItem/ItemDescription';
 
-import { selectTicketById } from './allTicketsSlice';
-import { selectCurrentTicket } from '../navBar/viewSlice';
+import { selectTicketById, selectAllTickets} from './allTicketsSlice';
+import { selectCurrentTicket,  } from '../navBar/viewSlice';
 
 export default function TicketPage(){
 
@@ -35,6 +35,7 @@ const dispatch = useDispatch();
 //let currentTicket = useSelector(selectTicketById('ft0001'));
 let currentTicket = useSelector(selectCurrentTicket);
 console.log(currentTicket);
+
 
 
 if(currentTicket !== undefined){
@@ -47,7 +48,7 @@ return(
             <ItemAssignedUsers assignedUsers={currentTicket.assignedUsers} />
         </div>
         <div className="comment-box">
-            <ItemComments commentsArray={currentTicket.comments}/>
+            <ItemComments dataObject={currentTicket}/>
         </div>
         
     </div>

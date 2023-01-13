@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { setProject, setTicket, changeView } from '../../features/navBar/viewSlice';
+import { updateAdmin } from '../../features/usersPage/allUsersSlice';
 import { useDispatch } from 'react-redux';
 
 export default function DataRow({dataItem, dataType}){
@@ -22,6 +23,11 @@ export default function DataRow({dataItem, dataType}){
             //because my dev_data causes recursion with ticket.associatedProject, clicking on that for now won't do anything
         }
 
+    }
+
+    const updateIsAdmin = (userId) =>{
+        dispatch(updateAdmin(userId));
+        
     }
 
     switch(dataType){
@@ -57,16 +63,29 @@ export default function DataRow({dataItem, dataType}){
                         <td>{dataItem.createdBy.name}</td>
                     </tr>
             )
+        case 'users':
+            return(
+                <tr className="data-row">
+                    <td id="name">{dataItem.name}</td>
+                    <td id="id">{dataItem.id}</td>
+                    <td id="isAdmin">
+                        <input type="checkbox" onChange={() => updateIsAdmin(dataItem.id)} checked={dataItem.isAdmin}>
+
+                        </input>
+                    </td>
+                </tr>
+            )
 
 
     }
 
     //default case for testing purposes
     return (
-        <div className="data-row">
+        <div className="default-test-row">
             <tr>
                 <td>{dataItem.name}</td>
                 <td>{dataItem.description}</td>
+                {dataItem.isAdmin ? "Yes" : "No"}
             </tr>
 
         </div>
