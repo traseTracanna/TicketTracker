@@ -66,7 +66,7 @@ export const allProjectsSlice = createSlice({
             };
 
         },
-        assignUser: (state,action) =>{
+        assignProjectUser: (state,action) =>{
             const projectIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
             if(projectIndex !== -1){
                 state[projectIndex].assignedUsers.push(action.payload.data);
@@ -138,7 +138,7 @@ export const {
     addProjectComment,
     addTicket,
     removeTicket,
-    assignUser,
+    assignProjectUser,
     removeUser,
     updateDesc,
     addProjectManager

@@ -53,7 +53,7 @@ export const allTicketsSlice = createSlice({
             state.filter((ticket) => ticket.id !== action.payload.id);
 
         },
-        assignUser: (state,action) =>{
+        assignTicketUser: (state,action) =>{
             const ticketIndex = state.findIndex((stateElement) => stateElement.id === action.payload.id);
             if(ticketIndex !== -1){
                 state[ticketIndex].assignedUsers.push(action.payload.data);
@@ -87,7 +87,9 @@ export const allTicketsSlice = createSlice({
                 //const newComments = state[ticketIndex].comments
                 //newComments.push(action.payload.data);
                 //state[ticketIndex].comments = newComments;
-                state[ticketIndex].comments.push(action.payload.data);
+                const newComment = [action.payload.data]
+                console.log(newComment);
+                state[ticketIndex].comments = state[ticketIndex].comments.concat(newComment);
 
             };
 
@@ -123,7 +125,8 @@ export const selectTicketById = id => state =>{
     const allTickets = selectAllTickets(state);
 
     return (allTickets.filter((ticket) => ticket.id === id))[0];
-}
+};
+
 
 //Exports: 
 
@@ -132,7 +135,7 @@ export const {
     addTicketComment,
     addTicket,
     removeTicket,
-    assignUser,
+    assignTicketUser,
     removeUser,
     updateDesc,
     updatePriority,

@@ -19,6 +19,9 @@ export default function TitleBar({dataType}){
         case 'users':
             columnHeadings = ['Name', 'ID', 'isAdmin']
             break;
+        case 'addUsers':
+            columnHeadings = ['Name', 'Assigned To This Project']
+            break;
         default:
             columnHeadings = ['error'];
     };

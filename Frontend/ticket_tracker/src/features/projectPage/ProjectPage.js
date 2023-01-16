@@ -32,6 +32,9 @@ import  DataTable  from '../../components/DataTable/DataTable';
 import { selectProjectById } from './allProjectsSlice';
 import { selectCurrentProject } from '../navBar/viewSlice';
 
+//let currentProject = useSelector(selectCurrentProject);
+
+
 export default function ProjectPage(){
 
 

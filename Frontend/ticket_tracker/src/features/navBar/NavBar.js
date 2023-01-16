@@ -48,6 +48,8 @@ export default function NavBar(){
 
     }
 
+    
+
     const contentDisplayHelper = () =>{
         
             switch(currentView.view){

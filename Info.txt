@@ -398,7 +398,7 @@ I think my immediate goal should be to
         7) Design update functionality to the data i.e.:
             a) adding users to tickets and projects
             b) creating new tickets and projects
-            c) updating ticket priority
+            c) updating ticket/project descriptions
             d) adding new comments
             e) deleting/archiving tickets and projects
                 - Again, don't need to get too stunlucked on this one either -- can always circle back
